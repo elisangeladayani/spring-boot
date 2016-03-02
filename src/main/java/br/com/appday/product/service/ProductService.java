@@ -6,8 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.sun.jersey.core.header.FormDataContentDisposition;
-
 import br.com.appday.product.domain.Product;
 import br.com.appday.product.domain.repository.ProductRepository;
 import io.minio.MinioClient;
@@ -26,14 +24,15 @@ public class ProductService {
         productRepository.save(product);
     }
 
-    public void saveImage(String id, InputStream fileInputStream, FormDataContentDisposition fileDetail) {
+    public void saveImage(String id, InputStream fileInputStream, String contentType) {
         Product product = productRepository.findOne(id);
         // TODO chamar minio
         try {
+
             MinioClient minioClient = new MinioClient("http://localhost:9000", "N4BEIOH6PAHSG25I4TFI",
                     "YN65o85VPABXYzYHbs4aNPdGotLknXmKokz91+3m");
 
-            minioClient.putObject("dojo", id, fileInputStream, fileInputStream.available(), fileDetail.getType());
+            minioClient.putObject("dojo", id, fileInputStream, fileInputStream.available(), contentType);
 
             fileInputStream.close();
         } catch (Exception e) {
