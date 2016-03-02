@@ -3,30 +3,29 @@ Example Web Application
 
 
 # Docker images
--Go to folder *docker-images*
--Execute *docker-compose up*
+Go to folder *docker-images*
+
+Execute *docker-compose up*
 
 ##Redis
--**port**: 6379
--**password**: segredo
+**port**: 6379
+**password**: segredo
 
 ##RabbitMQ
--**port**: 5672
--**admin.port**: 15672
--**user**: dojo
--**password**: dojo
--**vhost**: dojo\_vhost
+**port**: 5672
+**admin.port**: 15672
+**user**: dojo
+**password**: dojo
+**vhost**: dojo\_vhost
 
 ##MySQL
--**port**: 3306
--**user**: dojo
--**password**: dojo
--**database**: dojo
+**port**: 3306
+**user**: dojo
+**password**: dojo
+**database**: dojo
 
 ##MongoDB
-<<<<<<< Updated upstream
--**port**: 27017
-=======
+**port**: 27017
 **port**: 27017
 
 ##Minio
@@ -36,4 +35,3 @@ Example Web Application
 **secretKey**: YN65o85VPABXYzYHbs4aNPdGotLknXmKokz91+3m
 **region**: us-east-1
 
->>>>>>> Stashed changes
