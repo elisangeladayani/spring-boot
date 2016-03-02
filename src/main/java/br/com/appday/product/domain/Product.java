@@ -1,10 +1,13 @@
-package br.com.appday.product.model;
+package br.com.appday.product.domain;
 
 import java.math.BigDecimal;
 
+import org.springframework.data.annotation.Id;
+
 public class Product {
 
-    Long id;
+    @Id
+    String id;
 
     String name;
 
@@ -20,18 +23,26 @@ public class Product {
 
     BigDecimal freightValue;
 
+    public Product() {
+
+    }
+
+    public Product(String name) {
+        this.name = name;
+    }
+
     /**
      * Getter for field id.
-     * 
+     *
      * @return the id
      */
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
     /**
      * Getter for field name.
-     * 
+     *
      * @return the name
      */
     public String getName() {
@@ -40,7 +51,7 @@ public class Product {
 
     /**
      * Getter for field description.
-     * 
+     *
      * @return the description
      */
     public String getDescription() {
@@ -49,7 +60,7 @@ public class Product {
 
     /**
      * Getter for field price.
-     * 
+     *
      * @return the price
      */
     public BigDecimal getPrice() {
@@ -58,7 +69,7 @@ public class Product {
 
     /**
      * Getter for field discount.
-     * 
+     *
      * @return the discount
      */
     public BigDecimal getDiscount() {
@@ -67,7 +78,7 @@ public class Product {
 
     /**
      * Getter for field installmentQuantity.
-     * 
+     *
      * @return the installmentQuantity
      */
     public Integer getInstallmentQuantity() {
@@ -76,7 +87,7 @@ public class Product {
 
     /**
      * Getter for field imageLocation.
-     * 
+     *
      * @return the imageLocation
      */
     public String getImageLocation() {
@@ -85,7 +96,7 @@ public class Product {
 
     /**
      * Getter for field freightValue.
-     * 
+     *
      * @return the freightValue
      */
     public BigDecimal getFreightValue() {
