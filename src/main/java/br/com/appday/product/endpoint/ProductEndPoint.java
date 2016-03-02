@@ -1,5 +1,6 @@
 package br.com.appday.product.endpoint;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
@@ -11,11 +12,10 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
+import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import com.sun.jersey.core.header.FormDataContentDisposition;
-import com.sun.jersey.multipart.FormDataParam;
 
 import br.com.appday.product.domain.Product;
 import br.com.appday.product.service.ProductService;
@@ -45,9 +45,8 @@ public class ProductEndPoint {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public void uploadImage(@PathParam("id") String id,
             @FormDataParam("file") InputStream fileInputStream,
-            @FormDataParam("file") FormDataContentDisposition fileDetail) {
-        productService.saveImage(id, fileInputStream, fileDetail);
-
+            @FormDataParam("file") FormDataContentDisposition fileDetail) throws IOException {
+        productService.saveImage(id, fileInputStream, fileDetail.getType());
     }
 
 }
