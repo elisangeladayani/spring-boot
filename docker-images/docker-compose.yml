@@ -33,3 +33,10 @@ mongo:
     - "27017:27017"
   volumes:
     - /var/docker/data/mongodb:/data/db
+
+minio:
+  image: diegorubin/minio
+  ports:
+    - "9000:9000"
+    - "9001:9001"
+
