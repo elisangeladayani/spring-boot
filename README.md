@@ -30,8 +30,12 @@ Execute *docker-compose up*
 
 ##Minio
 **ui.port**: 9001
+
 **port**: 9000
+
 **accessKey**: N4BEIOH6PAHSG25I4TFI
+
 **secretKey**: YN65o85VPABXYzYHbs4aNPdGotLknXmKokz91+3m
+
 **region**: us-east-1
 
