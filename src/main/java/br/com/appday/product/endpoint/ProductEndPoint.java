@@ -1,6 +1,5 @@
 package br.com.appday.product.endpoint;
 
-import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
@@ -45,7 +44,7 @@ public class ProductEndPoint {
     @Consumes(MediaType.MULTIPART_FORM_DATA)
     public void uploadImage(@PathParam("id") String id,
             @FormDataParam("file") InputStream fileInputStream,
-            @FormDataParam("file") FormDataContentDisposition fileDetail) throws IOException {
+            @FormDataParam("file") FormDataContentDisposition fileDetail) {
         productService.saveImage(id, fileInputStream, fileDetail.getType());
     }
 
