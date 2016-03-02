@@ -14,7 +14,7 @@ mysql:
     - MYSQL_USER=dojo
     - MYSQL_PASSWORD=dojo
   volumes:
-    - ~/mib/mysql:/var/lib/mysql
+    - /var/local/mysql:/var/lib/mysql
 
 rabbitmq:
   image: rabbitmq:3.5.4-management
