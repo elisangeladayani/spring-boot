@@ -1,0 +1,32 @@
+redis:
+  image: redis:2.8
+  ports:
+    - "6379:6379"
+  command: redis-server --requirepass segredo
+
+mysql:
+  image: mysql/mysql-server:5.6
+  ports:
+    - "3306:3306"
+  environment:
+    - MYSQL_ROOT_PASSWORD=123456
+    - MYSQL_DATABASE=dojo
+    - MYSQL_USER=dojo
+    - MYSQL_PASSWORD=123456
+  volumes:
+    - ~/mib/mysql:/var/lib/mysql
+
+rabbitmq:
+  image: rabbitmq:3.5.4-management
+  ports:
+    - "5672:5672"
+    - "15672:15672"
+  environment:
+    - RABBITMQ_NODENAME=rabbit@localhost
+
+mongo:
+  image: mongo
+  ports:
+    - "27017:27017"
+  volumes:
+    - /var/docker/data/mongodb:/data/db
