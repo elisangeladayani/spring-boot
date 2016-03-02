@@ -13,6 +13,9 @@ Execute *docker-compose up*
 ##RabbitMQ
 **port**: 5672
 **admin.port**: 15672
+**user**: dojo
+**password**: dojo
+**vhost**: dojo\_vhost
 
 ##MySQL
 **port**: 3306
