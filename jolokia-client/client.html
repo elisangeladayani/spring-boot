@@ -1,0 +1,33 @@
+<html>
+<head>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.2.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/json2/20150503/json2.js"></script>
+    <script type="text/javascript" src="https://github.com/rhuss/jolokia/releases/download/v1.3.3/jolokia.js"></script>
+    <script type="text/javascript" src="https://github.com/rhuss/jolokia/releases/download/v1.3.3/jolokia-simple.js"></script>
+</head>
+
+<script>
+    // Create a new jolokia client accessing the agent on the same
+    // Host which serves this document:
+    var j4p = new Jolokia("http://localhost:8080/system/jolokia");
+
+    // Request the memory information asynchronously and print it on
+    // the console
+    j4p.request(
+            {
+                type: "read",
+                mbean: "java.lang:type=Memory",
+                attribute: "HeapMemoryUsage"
+            },
+            {
+                success: function(response) {
+                    console.log(JSON.stringify(response));
+                    console.log("Heap-Memory used: " + response.value.used);
+                }
+            });
+
+    // Same as above, but synchronously and with the simple API:
+    console.log("Heap-Memory used:" +
+            j4p.getAttribute("java.lang.type=Memory","HeapMemoryUsage","used"));
+</script>
+</html>
