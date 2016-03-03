@@ -100,7 +100,12 @@ public class Product {
      * @return the freightValue
      */
     public BigDecimal getFreightValue() {
+
         return freightValue;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
 }

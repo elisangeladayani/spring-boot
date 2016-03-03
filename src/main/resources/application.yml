@@ -1,4 +1,10 @@
+external:
+  config: /tmp/netshoes/config.properties
+
 spring:
+  devtools:
+    remote:
+      secret: dojo
   data:
     mongodb:
       database: dojo

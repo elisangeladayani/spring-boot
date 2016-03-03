@@ -30,7 +30,12 @@ public class ProductEndPoint {
 
     @GET
     public List<Product> getAll() {
-        return productService.findAll();
+        List<Product> result = productService.findAll();
+        for(Product product: result) {
+            product.setName("-" + product.getName());
+        }
+
+        return result;
     }
 
     @POST
