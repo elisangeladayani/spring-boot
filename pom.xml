@@ -97,6 +97,12 @@
 			<version>1.51</version>
 		</dependency>
 
+		<dependency>
+			<groupId>org.jolokia</groupId>
+			<artifactId>jolokia-core</artifactId>
+		</dependency>
+
+
 	</dependencies>
 
 	<build>
