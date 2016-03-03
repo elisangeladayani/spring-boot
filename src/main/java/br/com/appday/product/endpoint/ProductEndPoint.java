@@ -27,7 +27,7 @@ import br.com.appday.product.service.ProductService;
 @Produces("application/json")
 public class ProductEndPoint {
 
-  Logger LOGGER = LoggerFactory.getLogger(ProductEndPoint.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(ProductEndPoint.class);
 
   @Autowired
   private ProductService productService;
