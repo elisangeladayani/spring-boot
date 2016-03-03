@@ -15,6 +15,7 @@ public class RestConfiguration extends ResourceConfig {
     public RestConfiguration() {
         register(ProductEndPoint.class);
         register(MultiPartFeature.class);
+        register(MultiPartFeature.class);
     }
 
 }
