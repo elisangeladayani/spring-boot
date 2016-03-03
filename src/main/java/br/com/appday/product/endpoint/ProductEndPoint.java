@@ -13,6 +13,8 @@ import javax.ws.rs.core.MediaType;
 
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -25,32 +27,30 @@ import br.com.appday.product.service.ProductService;
 @Produces("application/json")
 public class ProductEndPoint {
 
-    @Autowired
-    private ProductService productService;
+  Logger LOGGER = LoggerFactory.getLogger(ProductEndPoint.class);
 
-    @GET
-    public List<Product> getAll() {
-        List<Product> result = productService.findAll();
-        for(Product product: result) {
-            product.setName("-" + product.getName());
-        }
+  @Autowired
+  private ProductService productService;
 
-        return result;
-    }
+  @GET
+  public List<Product> getAll() {
+    LOGGER.debug("Start getAll()");
+    return productService.findAll();
+  }
 
-    @POST
-    public void create(Product product) {
-        productService.save(product);
+  @POST
+  public void create(Product product) {
+    productService.save(product);
 
-    }
+  }
 
-    @POST
-    @Path("/{id}")
-    @Consumes(MediaType.MULTIPART_FORM_DATA)
-    public void uploadImage(@PathParam("id") String id,
-            @FormDataParam("file") InputStream fileInputStream,
-            @FormDataParam("file") FormDataContentDisposition fileDetail) {
-        productService.saveImage(id, fileInputStream, fileDetail.getType());
-    }
+  @POST
+  @Path("/{id}")
+  @Consumes(MediaType.MULTIPART_FORM_DATA)
+  public void uploadImage(@PathParam("id") String id,
+      @FormDataParam("file") InputStream fileInputStream,
+      @FormDataParam("file") FormDataContentDisposition fileDetail) {
+    productService.saveImage(id, fileInputStream, fileDetail.getType());
+  }
 
 }
