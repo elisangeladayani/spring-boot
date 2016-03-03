@@ -1,0 +1,16 @@
+environments:
+    dev:
+		spring:
+			data:
+				mongodb:
+					database:dojo
+					host:localhost
+					port:27017
+		
+		server:
+			servlet-path:/system
+		
+		shell.ssh.enabled=true
+		shell.auth=simple
+		shell.auth.simple.user.name=dojo
+		shell.auth.simple.user.password=dojo
