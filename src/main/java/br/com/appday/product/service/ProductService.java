@@ -1,5 +1,6 @@
 package br.com.appday.product.service;
 
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.List;
 
@@ -31,7 +32,7 @@ public class ProductService {
             MinioClient minioClient = new MinioClient("http://localhost:9000", "N4BEIOH6PAHSG25I4TFI",
                     "YN65o85VPABXYzYHbs4aNPdGotLknXmKokz91+3m");
 
-            minioClient.putObject("dojo", id, fileInputStream, fileInputStream.available(), contentType);
+            minioClient.putObject("dojo", id, fileInputStream, ((FileInputStream) fileInputStream).getChannel().size(), contentType);
 
             fileInputStream.close();
         } catch (Exception e) {
