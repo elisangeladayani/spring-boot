@@ -8,7 +8,7 @@ spring:
   data:
     mongodb:
       database: dojo
-      host: 10.211.55.3
+      host: localhost
       port: 27017
   rabbitmq:
     host: localhost
@@ -16,7 +16,7 @@ spring:
     username: dojo
     password: dojo
   datasource:
-    url: jdbc:mysql://10.211.55.3:3306/dojo
+    url: jdbc:mysql://localhost:3306/dojo
     username: dojo
     password: dojo
     driver-class-name: com.mysql.jdbc.Driver
@@ -25,7 +25,7 @@ spring:
       ddl-auto: create-drop
 
   redis:
-    host: 10.211.55.3
+    host: localhost
     password: segredo
     port: 6379
 
