@@ -11,6 +11,11 @@ spring:
       host: localhost
       port: 27017
 
+  redis:
+    host: localhost
+    password: segredo
+    port: 6379
+
 server:
   servlet-path: /system
 
