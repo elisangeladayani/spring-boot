@@ -10,6 +10,11 @@ spring:
       database: dojo
       host: localhost
       port: 27017
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: dojo
+    password: dojo
   datasource:
     url: jdbc:mysql://localhost:3306/dojo
     username: dojo
@@ -35,3 +40,9 @@ shell:
       user:
         name: dojo
         password: dojo
+
+domains:
+  access:
+    control:
+      allow:
+        origin: '*'

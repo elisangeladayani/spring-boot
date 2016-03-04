@@ -2,7 +2,6 @@ package br.com.appday.product.endpoint;
 
 import br.com.appday.product.domain.Product;
 import br.com.appday.product.service.ProductService;
-import com.fasterxml.jackson.annotation.JsonCreator;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.slf4j.Logger;
@@ -29,7 +28,6 @@ public class ProductEndPoint {
 	private ProductService productService;
 
 	@GET
-	@JsonCreator
 	public Response getAll() {
 
         LOGGER.debug("Start getAll()");
