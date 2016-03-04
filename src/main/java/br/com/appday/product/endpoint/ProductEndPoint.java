@@ -27,30 +27,32 @@ import br.com.appday.product.service.ProductService;
 @Produces("application/json")
 public class ProductEndPoint {
 
-  private static final Logger LOGGER = LoggerFactory.getLogger(ProductEndPoint.class);
+	Logger LOGGER = LoggerFactory.getLogger(ProductEndPoint.class);
 
-  @Autowired
-  private ProductService productService;
+	@Autowired
+	private ProductService productService;
 
-  @GET
-  public List<Product> getAll() {
-    LOGGER.debug("Start getAll()");
-    return productService.findAll();
-  }
+	@GET
+	public List<Product> getAll() {
 
-  @POST
-  public void create(Product product) {
-    productService.save(product);
+		List<Product> result = productService.findAll();
+		LOGGER.debug("Start getAll()", result);
 
-  }
+		return result;
+	}
 
-  @POST
-  @Path("/{id}")
-  @Consumes(MediaType.MULTIPART_FORM_DATA)
-  public void uploadImage(@PathParam("id") String id,
-      @FormDataParam("file") InputStream fileInputStream,
-      @FormDataParam("file") FormDataContentDisposition fileDetail) {
-    productService.saveImage(id, fileInputStream, fileDetail.getType());
-  }
+	@POST
+	public void create(Product product) {
+		productService.save(product);
+
+	}
+
+	@POST
+	@Path("/{id}")
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	public void uploadImage(@PathParam("id") String id, @FormDataParam("file") InputStream fileInputStream,
+			@FormDataParam("file") FormDataContentDisposition fileDetail) {
+		productService.saveImage(id, fileInputStream, fileDetail.getType());
+	}
 
 }
