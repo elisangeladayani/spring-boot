@@ -8,7 +8,7 @@ spring:
   data:
     mongodb:
       database: dojo
-      host: localhost
+      host: 10.211.55.3
       port: 27017
 
 server:
