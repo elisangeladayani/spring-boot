@@ -22,13 +22,14 @@ import java.io.InputStream;
 @Produces("application/json")
 public class ProductEndPoint {
 
-	Logger LOGGER = LoggerFactory.getLogger(ProductEndPoint.class);
+    Logger LOGGER = LoggerFactory.getLogger(ProductEndPoint.class);
 
-	@Autowired
-	private ProductService productService;
+    @Autowired
+    private ProductService productService;
 
-	@GET
-	public Response getAll() {
+    @GET
+    @JsonCreator
+    public Response getAll() {
 
         LOGGER.debug("Start getAll()");
 
@@ -37,22 +38,22 @@ public class ProductEndPoint {
 
         LOGGER.debug("Ended getAll()");
 
-		return Response.ok(resources).build();
-	}
+        return Response.ok(resources).build();
+    }
 
-	@POST
-	public void create(Product product) {
-		productService.save(product);
-		productService.sendMessage(product);
+    @POST
+    public void create(Product product) {
+        productService.save(product);
+        productService.insertInRedisCache(product);
 
-	}
+    }
 
-	@POST
-	@Path("/{id}")
-	@Consumes(MediaType.MULTIPART_FORM_DATA)
-	public void uploadImage(@PathParam("id") String id, @FormDataParam("file") InputStream fileInputStream,
-			@FormDataParam("file") FormDataContentDisposition fileDetail) {
-		productService.saveImage(id, fileInputStream, fileDetail.getType());
-	}
+    @POST
+    @Path("/{id}")
+    @Consumes(MediaType.MULTIPART_FORM_DATA)
+    public void uploadImage(@PathParam("id") String id, @FormDataParam("file") InputStream fileInputStream,
+                            @FormDataParam("file") FormDataContentDisposition fileDetail) {
+        productService.saveImage(id, fileInputStream, fileDetail.getType());
+    }
 
 }

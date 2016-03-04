@@ -23,6 +23,8 @@ public class Product {
 
     BigDecimal freightValue;
 
+    Boolean inCache;
+
     public Product() {
 
     }
@@ -104,8 +106,16 @@ public class Product {
         return freightValue;
     }
 
+    public Boolean getInCache() {
+        return inCache;
+    }
+
     public void setName(String name) {
         this.name = name;
+    }
+
+    public void setInCache(Boolean inCache) {
+        this.inCache = inCache;
     }
 
 }
