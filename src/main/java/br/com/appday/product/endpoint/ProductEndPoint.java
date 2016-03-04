@@ -45,6 +45,7 @@ public class ProductEndPoint {
 	@POST
 	public void create(Product product) {
 		productService.save(product);
+		productService.sendMessage(product);
 
 	}
 
