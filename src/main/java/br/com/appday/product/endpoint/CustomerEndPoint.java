@@ -25,6 +25,7 @@ public class CustomerEndPoint {
   @POST
   public void create(Customer customer) {
     customerService.save(customer);
+
   }
 
 }

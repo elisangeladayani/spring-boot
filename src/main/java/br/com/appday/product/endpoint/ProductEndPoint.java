@@ -2,8 +2,9 @@ package br.com.appday.product.endpoint;
 
 import br.com.appday.product.domain.Product;
 import br.com.appday.product.service.ProductService;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import org.glassfish.jersey.media.multipart.*;
+import org.glassfish.jersey.media.multipart.BodyPartEntity;
+import org.glassfish.jersey.media.multipart.FormDataBodyPart;
+import org.glassfish.jersey.media.multipart.FormDataMultiPart;
 import org.jvnet.mimepull.MIMEPart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +17,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.File;
-import java.io.InputStream;
 import java.lang.reflect.Field;
 
 @Component
@@ -31,14 +31,11 @@ public class ProductEndPoint {
     private ProductService productService;
 
     @GET
-    @JsonCreator
     public Response getAll() {
 
         LOGGER.debug("Start getAll()");
-
         Resources<Product> resources = new Resources<>(productService.findAll(), JaxRsLinkBuilder
                 .linkTo(ProductEndPoint.class).withSelfRel());
-
         LOGGER.debug("Ended getAll()");
 
         return Response.ok(resources).build();
@@ -48,6 +45,10 @@ public class ProductEndPoint {
     public void create(Product product) {
         productService.save(product);
         productService.insertInRedisCache(product);
+
+        String msgbody = "Olá, o produto " + product.getName() + " foi cadastrado com sucesso.";
+
+        productService.sendMail("vsoares@gmail.com", "Produto cadastrado", msgbody);
 
     }
 
