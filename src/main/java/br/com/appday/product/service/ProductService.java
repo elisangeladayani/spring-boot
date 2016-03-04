@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Component;
 
 import br.com.appday.product.domain.Product;
@@ -16,6 +17,9 @@ public class ProductService {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private StringRedisTemplate redisTemplate;
 
     public List<Product> findAll() {
         return productRepository.findAll();
@@ -41,6 +45,10 @@ public class ProductService {
 
         // TODO associar imagem do minio ao produto
         // TODO atualizar produto
+    }
+
+    public void sendMessage(Product product) {
+       redisTemplate.convertAndSend("products", product.getName());
     }
 
 }

@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import br.com.appday.product.endpoint.ProductEndPoint;
 
 @Configuration
-@ApplicationPath("/")
+@ApplicationPath("/api")
 public class RestConfiguration extends ResourceConfig {
 
     public RestConfiguration() {

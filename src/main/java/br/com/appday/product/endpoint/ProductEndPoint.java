@@ -1,25 +1,21 @@
 package br.com.appday.product.endpoint;
 
-import java.io.InputStream;
-import java.util.List;
-
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
-
+import br.com.appday.product.domain.Product;
+import br.com.appday.product.service.ProductService;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.Resources;
+import org.springframework.hateoas.jaxrs.JaxRsLinkBuilder;
 import org.springframework.stereotype.Component;
 
-import br.com.appday.product.domain.Product;
-import br.com.appday.product.service.ProductService;
+import javax.ws.rs.*;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.io.InputStream;
 
 @Component
 @Path("/products")
@@ -33,17 +29,23 @@ public class ProductEndPoint {
 	private ProductService productService;
 
 	@GET
-	public List<Product> getAll() {
+	@JsonCreator
+	public Response getAll() {
 
-		List<Product> result = productService.findAll();
-		LOGGER.debug("Start getAll()", result);
+        LOGGER.debug("Start getAll()");
 
-		return result;
+        Resources<Product> resources = new Resources<>(productService.findAll(), JaxRsLinkBuilder
+                .linkTo(ProductEndPoint.class).withSelfRel());
+
+        LOGGER.debug("Ended getAll()");
+
+		return Response.ok(resources).build();
 	}
 
 	@POST
 	public void create(Product product) {
 		productService.save(product);
+		productService.sendMessage(product);
 
 	}
 
