@@ -19,6 +19,11 @@ spring:
     hibernate:
       ddl-auto: create-drop
 
+  redis:
+    host: localhost
+    password: segredo
+    port: 6379
+
 server:
   servlet-path: /system
 
