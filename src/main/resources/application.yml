@@ -15,6 +15,11 @@ spring:
     port: 5672
     username: dojo
     password: dojo
+  datasource:
+    url: jdbc:mysql://localhost:3306/dojo
+    username: dojo
+    password: dojo
+    driver-class-name: com.mysql.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: create-drop
@@ -23,6 +28,10 @@ spring:
     host: localhost
     password: segredo
     port: 6379
+  sendgrid:
+    username:
+    password:
+    api-key: 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
 
 minio:
   host: http://localhost:9000
