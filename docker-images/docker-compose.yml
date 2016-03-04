@@ -36,6 +36,7 @@ mongo:
 
 minio:
   image: diegorubin/minio
+  net: host
   ports:
     - "9000:9000"
     - "9001:9001"
