@@ -39,7 +39,7 @@ public class Customer {
   private String surname;
 
   @Column
-  private LocalDate birthday;
+  private Date birthday;
 
   @Column
   private Date createdAt;
@@ -103,7 +103,7 @@ public class Customer {
    *
    * @return the birthday
    */
-  public LocalDate getBirthday() {
+  public Date getBirthday() {
     return birthday;
   }
 
@@ -112,7 +112,7 @@ public class Customer {
    *
    * @param birthday the birthday
    */
-  public void setBirthday(LocalDate birthday) {
+  public void setBirthday(Date birthday) {
     this.birthday = birthday;
   }
 
