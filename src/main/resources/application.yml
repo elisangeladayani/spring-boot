@@ -24,6 +24,11 @@ spring:
     password: segredo
     port: 6379
 
+minio:
+  host: http://localhost:9000
+  access-key: N4BEIOH6PAHSG25I4TFI
+  secret-key: YN65o85VPABXYzYHbs4aNPdGotLknXmKokz91+3m
+
 server:
   servlet-path: /system
 

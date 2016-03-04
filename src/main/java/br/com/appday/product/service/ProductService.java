@@ -1,5 +1,6 @@
 package br.com.appday.product.service;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.List;
@@ -26,6 +27,9 @@ public class ProductService {
     private StringRedisTemplate redisTemplate;
 
     @Autowired
+    private MinioClient minioClient;
+
+    @Autowired
     private RedisTemplate<String, Product> productsCache;
 
     public List<Product> findAll() {
@@ -40,16 +44,10 @@ public class ProductService {
         productRepository.save(product);
     }
 
-    public void saveImage(String id, InputStream fileInputStream, String contentType) {
-        Product product = productRepository.findOne(id);
-        // TODO chamar minio
+    public void saveImage(String id, String filePath) {
+
         try {
-            MinioClient minioClient = new MinioClient("http://localhost:9000", "N4BEIOH6PAHSG25I4TFI",
-                    "YN65o85VPABXYzYHbs4aNPdGotLknXmKokz91+3m");
-
-            minioClient.putObject("dojo", id, fileInputStream, ((FileInputStream) fileInputStream).getChannel().size(), contentType);
-
-            fileInputStream.close();
+            minioClient.putObject("dojo", id, filePath);
         } catch (Exception e) {
             e.printStackTrace();
         }
