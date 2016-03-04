@@ -10,6 +10,14 @@ spring:
       database: dojo
       host: localhost
       port: 27017
+  datasource:
+    url: jdbc:mysql://localhost:3306/dojo
+    username: dojo
+    password: dojo
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
 
 server:
   servlet-path: /system
