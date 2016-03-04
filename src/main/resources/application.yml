@@ -35,3 +35,9 @@ shell:
       user:
         name: dojo
         password: dojo
+
+domains:
+  access:
+    control:
+      allow:
+        origin: '*'
