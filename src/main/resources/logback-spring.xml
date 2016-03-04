@@ -19,10 +19,6 @@
         </layout>
 
     </appender>
-
-    <logger name="org.springframework.web" level="DEBUG">
-        <appender-ref ref="STDOUT" />
-    </logger>
     <logger name="br.com.appday" level="DEBUG">
         <appender-ref ref="JSON-STDOUT" />
     </logger>
