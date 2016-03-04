@@ -8,10 +8,10 @@ spring:
   data:
     mongodb:
       database: dojo
-      host: localhost
+      host: 10.211.55.3
       port: 27017
   datasource:
-    url: jdbc:mysql://localhost:3306/dojo
+    url: jdbc:mysql://10.211.55.3:3306/dojo
     username: dojo
     password: dojo
     driver-class-name: com.mysql.jdbc.Driver
@@ -20,7 +20,7 @@ spring:
       ddl-auto: create-drop
 
   redis:
-    host: localhost
+    host: 10.211.55.3
     password: segredo
     port: 6379
 
