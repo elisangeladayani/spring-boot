@@ -58,25 +58,30 @@ public class ProductEndPoint {
     public void uploadImage(@PathParam("id") String id, FormDataMultiPart form) {
 
         try {
-            FormDataBodyPart filePart = form.getField("file");
-            BodyPartEntity bodyPart = (BodyPartEntity) filePart.getEntity();
-
-            MIMEPart mimePart = (MIMEPart) readFieldValue("mimePart", bodyPart);
-            Object dataHead = readFieldValue("dataHead", mimePart);
-            Object dataFile = readFieldValue("dataFile", dataHead);
-            File tempFile = null;
-            if (dataFile != null) {
-                Object weakDataFile = readFieldValue("weak", dataFile);
-                tempFile = (File) readFieldValue("file", weakDataFile);
-            } else {
-                tempFile = filePart.getValueAs(File.class);
-            }
-
+            File tempFile = createTempFile(form, "file");
             productService.saveImage(id, tempFile.getAbsolutePath());
             LOGGER.debug("Ended uploadImage");
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private static File createTempFile(FormDataMultiPart form, String field) throws Exception {
+        FormDataBodyPart filePart = form.getField(field);
+        BodyPartEntity bodyPart = (BodyPartEntity) filePart.getEntity();
+
+        MIMEPart mimePart = (MIMEPart) readFieldValue("mimePart", bodyPart);
+        Object dataHead = readFieldValue("dataHead", mimePart);
+        Object dataFile = readFieldValue("dataFile", dataHead);
+        File tempFile = null;
+        if (dataFile != null) {
+            Object weakDataFile = readFieldValue("weak", dataFile);
+            tempFile = (File) readFieldValue("file", weakDataFile);
+        } else {
+            tempFile = filePart.getValueAs(File.class);
+        }
+
+        return tempFile;
     }
 
     private static Object readFieldValue(String fieldName, Object o) throws Exception {
@@ -85,3 +90,4 @@ public class ProductEndPoint {
         return field.get(o);
     }
 }
+
