@@ -34,10 +34,15 @@ mongo:
   volumes:
     - /var/docker/data/mongodb:/data/db
 
-minio:
-  image: diegorubin/minio
-  net: host
-  ports:
-    - "9000:9000"
-    - "9001:9001"
+#minio:
+#  image: diegorubin/minio
+#  net: host
+#  ports:
+#    - "9000:9000"
+#    - "9001:9001"
+
+#graylog:
+#  image:  eeacms/graylog2
+#  ports:
+#    - "9000:9000"
 

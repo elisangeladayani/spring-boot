@@ -5,6 +5,7 @@ import br.com.appday.product.service.ProductService;
 import org.glassfish.jersey.media.multipart.BodyPartEntity;
 import org.glassfish.jersey.media.multipart.FormDataBodyPart;
 import org.glassfish.jersey.media.multipart.FormDataMultiPart;
+import org.glassfish.jersey.server.ManagedAsync;
 import org.jvnet.mimepull.MIMEPart;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,10 +15,13 @@ import org.springframework.hateoas.jaxrs.JaxRsLinkBuilder;
 import org.springframework.stereotype.Component;
 
 import javax.ws.rs.*;
+import javax.ws.rs.container.AsyncResponse;
+import javax.ws.rs.container.Suspended;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.File;
 import java.lang.reflect.Field;
+import java.util.List;
 
 @Component
 @Path("/products")
@@ -31,12 +35,31 @@ public class ProductEndPoint {
     private ProductService productService;
 
     @GET
-    public Response getAll() {
+    @Path("/async")
+    @ManagedAsync
+    /**
+     * NOT HATEOAS
+     */
+    public void asyncGetAll(@Suspended final AsyncResponse asyncResponse) {
+        LOGGER.debug("Start getAll() async");
+        asyncResponse.resume(Response.ok(productService.findAll()).build());
+        LOGGER.debug("Ended getAll() async");
+    }
 
-        LOGGER.debug("Start getAll()");
+    @GET
+    /**
+     * HATEOAS
+     */
+    public Response syncGetAll() {
+        return findAll("sync");
+    }
+
+    private Response findAll(String path) {
+
+        LOGGER.debug("Start getAll() {}", path);
         Resources<Product> resources = new Resources<>(productService.findAll(), JaxRsLinkBuilder
                 .linkTo(ProductEndPoint.class).withSelfRel());
-        LOGGER.debug("Ended getAll()");
+        LOGGER.debug("Ended getAll() {}", path);
 
         return Response.ok(resources).build();
     }

@@ -10,7 +10,7 @@
         </encoder>
     </appender>
 
-    <appender name="JSON-STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <appender name="JSON-FORMATTER-STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <layout class="ch.qos.logback.contrib.json.classic.JsonLayout">
             <jsonFormatter class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter">
                 <prettyPrint>true</prettyPrint>
@@ -19,8 +19,30 @@
         </layout>
 
     </appender>
+
+    <appender name="JSON-STASH-FORMATTER-STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
+
+                <jsonGeneratorDecorator class="br.com.appday.logback.JsonGeneratorDecoratorConfig"/>
+
+            <providers>
+                <arguments/>
+                <timestamp>
+                    <pattern>yyyy-MM-dd HH:mm:ss</pattern>
+                </timestamp>
+                <nestedField>
+                    <fieldName>@fields</fieldName>
+                    <providers>
+                        <logLevel/>
+                    </providers>
+                </nestedField>
+            </providers>
+        </encoder>
+    </appender>
+
     <logger name="br.com.appday" level="DEBUG">
-        <appender-ref ref="JSON-STDOUT" />
+        <appender-ref ref="JSON-FORMATTER-STDOUT" />
+        <appender-ref ref="JSON-STASH-FORMATTER-STDOUT" />
     </logger>
 
 </configuration>

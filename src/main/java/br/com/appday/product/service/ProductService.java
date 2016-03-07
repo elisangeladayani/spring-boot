@@ -17,6 +17,8 @@ import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.stereotype.Component;
 
+import static net.logstash.logback.argument.StructuredArguments.*;
+
 import java.util.List;
 
 @Component
@@ -51,6 +53,7 @@ public class ProductService {
         List<Product> products = productRepository.findAll();
         for (Product product : products) {
             product.setInCache(inCache(product));
+            LOGGER.info("Returning product...", value("payload", product));
         }
         return products;
     }
