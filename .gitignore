@@ -27,6 +27,8 @@
 # Mongo Explorer plugin:
 # .idea/mongoSettings.xml
 
+*/sendgrid-key
+
 ## File-based project format:
 *.ipr
 *.iws
@@ -63,9 +65,6 @@ generated-test-sources
 maven-status
 test-classes
 .DS_Store
-
-**/sendgrid-key
-
 
 .classpath
 .project
