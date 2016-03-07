@@ -64,6 +64,8 @@ maven-status
 test-classes
 .DS_Store
 
+sendgrid-key
+
 
 .classpath
 .project
