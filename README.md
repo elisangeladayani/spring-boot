@@ -53,7 +53,7 @@ __metrics:__ http://localhost:8080/system/metrics
 
 ##Config Properties
 
-__config props:__ http://localhost:8080/system/config/props
+__config props:__ http://localhost:8080/system/configprops
 
 ##HTTP-JMX
 
