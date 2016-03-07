@@ -64,7 +64,7 @@ maven-status
 test-classes
 .DS_Store
 
-sendgrid-key
+**/sendgrid-key
 
 
 .classpath
