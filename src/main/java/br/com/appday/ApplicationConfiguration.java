@@ -1,12 +1,16 @@
 package br.com.appday;
 
+import br.com.appday.amqp.AMQPReceiver;
 import br.com.appday.minio.MinioTemplate;
 import br.com.appday.product.domain.Product;
 import br.com.appday.product.receivers.ProductReceiver;
 import io.minio.MinioClient;
-import io.minio.errors.InvalidPortException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.springframework.amqp.core.Binding;
+import org.springframework.amqp.core.BindingBuilder;
+import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.core.TopicExchange;
+import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -26,6 +30,8 @@ import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 @SpringBootApplication
 @EnableMongoRepositories(basePackages = "br.com.appday.product.domain.repository")
 public class ApplicationConfiguration extends SpringBootServletInitializer {
+
+    final static String queueName = "customerQueue";
 
     @Autowired
     MinioTemplate minioTemplate;
@@ -73,6 +79,40 @@ public class ApplicationConfiguration extends SpringBootServletInitializer {
     @Bean
     MinioClient minioClient(Environment env) {
         return minioTemplate.getMinioClient();
+    }
+
+    @Bean
+    Queue queue() {
+        return new Queue(queueName, false);
+    }
+
+    @Bean
+    TopicExchange exchange() {
+        return new TopicExchange("dojo-exchange");
+    }
+
+    @Bean
+    Binding binding(Queue queue, TopicExchange topicExchange) {
+        return BindingBuilder.bind(queue).to(topicExchange).with(queueName);
+    }
+
+    @Bean
+    SimpleMessageListenerContainer messageListenerContainer(ConnectionFactory connectionFactory, org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter messageListenerAdapter) {
+        SimpleMessageListenerContainer messageListenerContainer = new SimpleMessageListenerContainer();
+        messageListenerContainer.setConnectionFactory(connectionFactory);
+        messageListenerContainer.setQueueNames(queueName);
+        messageListenerContainer.setMessageListener(messageListenerAdapter);
+        return messageListenerContainer;
+    }
+
+    @Bean
+    AMQPReceiver amqpReceiver() {
+        return new AMQPReceiver();
+    }
+
+    @Bean
+    org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter messageListenerAdapter(AMQPReceiver amqpReceiver) {
+        return new org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter(amqpReceiver, "receiveMessage");
     }
 
     @Override

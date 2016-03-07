@@ -2,6 +2,7 @@ package br.com.appday;
 
 import javax.ws.rs.ApplicationPath;
 
+import br.com.appday.amqp.AMQPService;
 import br.com.appday.product.endpoint.CustomerEndPoint;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import org.glassfish.jersey.server.ResourceConfig;

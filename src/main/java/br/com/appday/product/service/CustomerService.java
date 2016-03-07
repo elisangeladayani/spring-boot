@@ -1,5 +1,6 @@
 package br.com.appday.product.service;
 
+import br.com.appday.amqp.AMQPService;
 import br.com.appday.product.domain.Customer;
 import br.com.appday.product.domain.repository.CustomerRepository;
 import com.google.common.collect.Lists;
@@ -15,6 +16,9 @@ public class CustomerService {
   @Autowired
   private CustomerRepository repository;
 
+  @Autowired
+  private AMQPService amqpService;
+
   public List<Customer> getAll() {
     return Lists.newArrayList(repository.findAll());
   }
@@ -22,6 +26,7 @@ public class CustomerService {
   public void save(Customer customer) {
     customer.setCreatedAt(new Date());
     repository.save(customer);
+    amqpService.postMessage(customer);
   }
 
 }
