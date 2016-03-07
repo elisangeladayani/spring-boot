@@ -51,6 +51,10 @@ __health:__ http://localhost:8080/system/health
 
 __metrics:__ http://localhost:8080/system/metrics
 
+##Config Properties
+
+__config props:__ http://localhost:8080/system/configprops
+
 ##HTTP-JMX
 
 http://localhost:8080/system/jolokia
