@@ -8,16 +8,16 @@ spring:
   data:
     mongodb:
       database: dojo
-      host: 10.211.55.3
+      host: localhost
       port: 27017
   rabbitmq:
-    host: 10.211.55.3
+    host: localhost
     port: 5672
     username: dojo
     password: dojo
     virtual-host: dojo_vhost
   datasource:
-    url: jdbc:mysql://10.211.55.3:3306/dojo
+    url: jdbc:mysql://localhost:3306/dojo
     username: dojo
     password: dojo
     driver-class-name: com.mysql.jdbc.Driver
@@ -26,7 +26,7 @@ spring:
       ddl-auto: create-drop
 
   redis:
-    host: 10.211.55.3
+    host: localhost
     password: segredo
     port: 6379
   sendgrid:
@@ -35,7 +35,7 @@ spring:
     api-key: #put your sendgrid api key here
 
 minio:
-  host: http://10.211.55.3:9000
+  host: http://localhost:9000
   access-key: N4BEIOH6PAHSG25I4TFI
   secret-key: YN65o85VPABXYzYHbs4aNPdGotLknXmKokz91+3m
 

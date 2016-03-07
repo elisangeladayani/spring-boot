@@ -39,3 +39,20 @@ Execute *docker-compose up*
 
 **region**: us-east-1
 
+##Remote Shell
+
+Use `ssh dojo@localhost -p 2000`
+
+password: dojo
+
+##Metrics And Healthcheck
+
+__health:__ http://localhost:8080/system/health
+
+__metrics:__ http://localhost:8080/system/metrics
+
+##HTTP-JMX
+
+http://localhost:8080/system/jolokia
+
+
