@@ -39,6 +39,9 @@ Execute *docker-compose up*
 
 **region**: us-east-1
 
+##GrayLog
+**port**: 9010
+
 ##Remote Shell
 
 Use `ssh dojo@localhost -p 2000`
