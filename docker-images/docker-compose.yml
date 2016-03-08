@@ -45,4 +45,5 @@ graylog:
   image:  elisangeladayani/graylog2
   ports:
     - "9010:9000"
-
+    - "12201:12201"
+    - "12201:12201/udp"

@@ -1,6 +1,10 @@
 external:
   config: /tmp/netshoes/config.properties
 
+
+logging:
+  file: product.log
+
 spring:
   devtools:
     remote:
