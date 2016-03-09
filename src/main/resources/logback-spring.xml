@@ -10,16 +10,15 @@
         </encoder>
     </appender>
 
-    <!--<appender name="JSON-FORMATTER-STDOUT" class="ch.qos.logback.core.ConsoleAppender">-->
-        <!--<layout class="ch.qos.logback.contrib.json.classic.JsonLayout">-->
-            <!--<jsonFormatter class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter">-->
-                <!--<prettyPrint>true</prettyPrint>-->
-            <!--</jsonFormatter>-->
-            <!--<timestampFormat>yyyy-MM-dd HH:mm:ss</timestampFormat>-->
-        <!--</layout>-->
+    <appender name="JSON-FORMATTER-STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.contrib.json.classic.JsonLayout">
+            <jsonFormatter class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter">
+                <prettyPrint>true</prettyPrint>
+            </jsonFormatter>
+            <timestampFormat>yyyy-MM-dd HH:mm:ss</timestampFormat>
+        </layout>
 
-    <!--</appender>-->
-
+    </appender>
 
     <appender name="JSON-STASH-FORMATTER-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
@@ -33,34 +32,17 @@
 
         <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
             <providers>
+                <timestamp/>
                 <message/>
                 <arguments/>
             </providers>
         </encoder>
     </appender>
 
-    <!--<appender name="JSON-STASH-FORMATTER-FILE" class="ch.qos.logback.core.FileAppender">-->
-        <!--<file>/var/log/ns/product.log</file>-->
-        <!--<encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">-->
-                <!--&lt;!&ndash;<jsonGeneratorDecorator class="br.com.appday.logback.JsonGeneratorDecoratorConfig"/>&ndash;&gt;-->
-            <!--<providers>-->
-                <!--<arguments/>-->
-                <!--<timestamp>-->
-                    <!--<pattern>yyyy-MM-dd HH:mm:ss</pattern>-->
-                <!--</timestamp>-->
-                <!--<nestedField>-->
-                    <!--<fieldName>@fields</fieldName>-->
-                    <!--<providers>-->
-                        <!--<logLevel/>-->
-                    <!--</providers>-->
-                <!--</nestedField>-->
-            <!--</providers>-->
-        <!--</encoder>-->
-    <!--</appender>-->
+    <logger name="br.com.appday" level="DEBUG">
+        <appender-ref ref="JSON-FORMATTER-STDOUT" />
+    </logger>
 
-    <!--<logger name="br.com.appday" level="DEBUG">-->
-        <!--<appender-ref ref="JSON-FORMATTER-STDOUT" />-->
-    <!--</logger>-->
 
     <!-- Setting the root level of logging to INFO -->
     <root level="INFO">
