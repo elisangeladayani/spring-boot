@@ -57,7 +57,8 @@ public class ProductEndPoint {
     private Response findAll(String path) {
 
         LOGGER.debug("Start getAll() {}", path);
-        Resources<Product> resources = new Resources<>(productService.findAll(), JaxRsLinkBuilder
+        List<Product> productList = productService.findAll();
+        Resources<Product> resources = new Resources<>(productList, JaxRsLinkBuilder
                 .linkTo(ProductEndPoint.class).withSelfRel());
         LOGGER.debug("Ended getAll() {}", path);
 

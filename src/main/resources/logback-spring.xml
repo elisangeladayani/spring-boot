@@ -10,15 +10,15 @@
         </encoder>
     </appender>
 
-    <appender name="JSON-FORMATTER-STDOUT" class="ch.qos.logback.core.ConsoleAppender">
-        <layout class="ch.qos.logback.contrib.json.classic.JsonLayout">
-            <jsonFormatter class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter">
-                <prettyPrint>true</prettyPrint>
-            </jsonFormatter>
-            <timestampFormat>yyyy-MM-dd HH:mm:ss</timestampFormat>
-        </layout>
+    <!--<appender name="JSON-FORMATTER-STDOUT" class="ch.qos.logback.core.ConsoleAppender">-->
+        <!--<layout class="ch.qos.logback.contrib.json.classic.JsonLayout">-->
+            <!--<jsonFormatter class="ch.qos.logback.contrib.jackson.JacksonJsonFormatter">-->
+                <!--<prettyPrint>true</prettyPrint>-->
+            <!--</jsonFormatter>-->
+            <!--<timestampFormat>yyyy-MM-dd HH:mm:ss</timestampFormat>-->
+        <!--</layout>-->
 
-    </appender>
+    <!--</appender>-->
 
 
     <appender name="JSON-STASH-FORMATTER-FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
@@ -33,12 +33,8 @@
 
         <encoder class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
             <providers>
-                <message>${HOSTNAME} - [${timestamp}] "${requestUrl}" ${statusCode} ${contentLength}
-                </message>
+                <message/>
                 <arguments/>
-                <!--<timestamp>-->
-                    <!--<pattern>yyyy-MM-dd HH:mm:ss</pattern>-->
-                <!--</timestamp>-->
             </providers>
         </encoder>
     </appender>
@@ -62,10 +58,9 @@
         <!--</encoder>-->
     <!--</appender>-->
 
-    <logger name="br.com.appday" level="DEBUG">
-        <appender-ref ref="JSON-FORMATTER-STDOUT" />
-        <appender-ref ref="JSON-STASH-FORMATTER-FILE" />
-    </logger>
+    <!--<logger name="br.com.appday" level="DEBUG">-->
+        <!--<appender-ref ref="JSON-FORMATTER-STDOUT" />-->
+    <!--</logger>-->
 
     <!-- Setting the root level of logging to INFO -->
     <root level="INFO">
